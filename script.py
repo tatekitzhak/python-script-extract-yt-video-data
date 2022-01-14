@@ -57,9 +57,12 @@ import urllib.parse
 import re
 
 print("Please, enter search query:")
+
 query_string = urllib.parse.urlencode({"search_query" : input()})
 html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
-search_results = re.findall(r"watch\?v=(.{11})", html_content.read().decode())
-print('Search query that provaided : %s' %(query_string))
-for i in search_results:
-   print("https://www.youtube.com/watch?v=" + i)
+search_resultsArray = re.findall(r"watch\?v=(.{11})", html_content.read().decode())
+         # https://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb
+
+print('Search query that provaided : %s' %(html_content))
+# for i in search_resultsArray:
+#    print("https://www.youtube.com/watch?v=" + i)
