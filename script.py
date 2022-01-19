@@ -4,7 +4,7 @@
 #######  https://www.programcreek.com/python/example/98358/youtube_dl.YoutubeDL
 #######  https://www.bogotobogo.com/VideoStreaming/YouTube/youtube-dl-embedding.php
 #######  https://www.codegrepper.com/code-examples/python/youtube-dl+python+download+to+specific+folder
-
+#######  https://www.codeproject.com/Articles/873060/Python-Search-Youtube-for-Video
 
 
 ############### Download youtube video by URL query ##########
@@ -13,7 +13,7 @@ from __future__ import unicode_literals
 import youtube_dl
 
 folder_name = 'converted_video_download'
-audio_file_name = 'audio_file_1'
+audio_file_name = 'ygrA_L-1tyk'
 
 ydl_opts ={
          'outtmpl': f'/Users/eli/git_repos/python-script-extract-yt-video-data/'+folder_name+'/'+audio_file_name,
@@ -26,7 +26,7 @@ ydl_opts ={
              }]
      }
 
-url ='https://www.youtube.com/watch?v=3mk2lhqGM9w'
+url ='https://www.youtube.com/watch?v=ygrA_L-1tyk'
 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
     ydl.download([url])
 # info_dict = ydl.extract_info(url, download=False)
@@ -39,7 +39,7 @@ with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 # print('video_title: %s' %(video_title))
 
 
-meta = ydl.extract_info(url, download=False)
+# meta = ydl.extract_info(url, download=False)
 
 # print ('upload date : %s' %(info_dict['upload_date']))
 # print ('uploader    : %s' %(info_dict['uploader']))
@@ -59,14 +59,15 @@ meta = ydl.extract_info(url, download=False)
 # import urllib.request
 # import urllib.parse
 # import re
-#
+
 # print("Please, enter search query:")
-#
+
 # query_string = urllib.parse.urlencode({"search_query" : input()})
 # html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
 # search_results_array = re.findall(r"watch\?v=(.{11})", html_content.read().decode())
 #          #  https://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb
-#
+
 # print('Search query that provaided : %s' %(search_results_array))
 # for i in search_results_array:
 #    print("https://www.youtube.com/watch?v=" + i)
+

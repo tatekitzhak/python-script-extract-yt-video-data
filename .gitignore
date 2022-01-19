@@ -15,4 +15,4 @@ logs
 dist/*
 **/dist/*
 
-video_download/*
+converted_video_download/*
