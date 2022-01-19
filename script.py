@@ -1,6 +1,6 @@
 
 
-#######  https://stackoverflow.com/questions/40713268/download-youtube-video-using-python-to-a-certain-directory  
+#######  https://stackoverflow.com/questions/40713268/download-youtube-video-using-python-to-a-certain-directory
 #######  https://www.programcreek.com/python/example/98358/youtube_dl.YoutubeDL
 #######  https://www.bogotobogo.com/VideoStreaming/YouTube/youtube-dl-embedding.php
 #######  https://www.codegrepper.com/code-examples/python/youtube-dl+python+download+to+specific+folder
@@ -9,22 +9,26 @@
 
 ############### Download youtube video by URL query ##########
 
-# from __future__ import unicode_literals
-# import youtube_dl
+from __future__ import unicode_literals
+import youtube_dl
 
-# ydl_opts ={       
-#          'outtmpl': f'/Users/eli/git_repos/python-script-extract-yt-video-data/video_download/youtube_video_file',
-#          'noplaylist': True,
-#          'continue_dl': True,
-#          'postprocessors': [{
-#              'key': 'FFmpegExtractAudio',
-#              'preferredcodec': 'wav',
-#              'preferredquality': '192', }]
-#      }
+folder_name = 'converted_video_download'
+audio_file_name = 'audio_file_1'
 
-# url ='https://www.youtube.com/watch?v=vnPemSnnJYY&ab_channel=CharlesClayton'
-# with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-#     ydl.download([url])
+ydl_opts ={
+         'outtmpl': f'/Users/eli/git_repos/python-script-extract-yt-video-data/'+folder_name+'/'+audio_file_name,
+         'noplaylist': True,
+         'continue_dl': True,
+         'postprocessors': [{
+             'key': 'FFmpegExtractAudio',
+             'preferredcodec': 'wav',
+             'preferredquality': '192',
+             }]
+     }
+
+url ='https://www.youtube.com/watch?v=3mk2lhqGM9w'
+with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    ydl.download([url])
 # info_dict = ydl.extract_info(url, download=False)
 # video_url = info_dict.get("url", None)
 # video_id = info_dict.get("id", None)
@@ -35,7 +39,7 @@
 # print('video_title: %s' %(video_title))
 
 
-# meta = ydl.extract_info(url, download=False) 
+meta = ydl.extract_info(url, download=False)
 
 # print ('upload date : %s' %(info_dict['upload_date']))
 # print ('uploader    : %s' %(info_dict['uploader']))
@@ -52,17 +56,17 @@
 
 ############### Searching youtube videos by a string user input ##########
 
-import urllib.request
-import urllib.parse
-import re
-
-print("Please, enter search query:")
-
-query_string = urllib.parse.urlencode({"search_query" : input()})
-html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
-search_results_array = re.findall(r"watch\?v=(.{11})", html_content.read().decode())
-         #  https://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb
-
-print('Search query that provaided : %s' %(search_results_array))
-for i in search_results_array:
-   print("https://www.youtube.com/watch?v=" + i)
+# import urllib.request
+# import urllib.parse
+# import re
+#
+# print("Please, enter search query:")
+#
+# query_string = urllib.parse.urlencode({"search_query" : input()})
+# html_content = urllib.request.urlopen("http://www.youtube.com/results?" + query_string)
+# search_results_array = re.findall(r"watch\?v=(.{11})", html_content.read().decode())
+#          #  https://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb
+#
+# print('Search query that provaided : %s' %(search_results_array))
+# for i in search_results_array:
+#    print("https://www.youtube.com/watch?v=" + i)
