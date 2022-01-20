@@ -10,7 +10,7 @@ from __future__ import unicode_literals
 import youtube_dl
 
 folder_name = 'converted_video_download'
-audio_file_name = 'audio_file_1'
+audio_file_name = 'F_QFkE-UbGM'
 
 ydl_opts ={
          'outtmpl': f'/Users/eli/git_repos/python-script-extract-yt-video-data/'+folder_name+'/'+audio_file_name,
@@ -23,28 +23,28 @@ ydl_opts ={
              }]
      }
 
-url ='https://www.youtube.com/watch?v=3mk2lhqGM9w'
+url ='https://www.youtube.com/watch?v=F_QFkE-UbGM'
 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
     ydl.download([url])
-info_dict = ydl.extract_info(url, download=False)
-video_url = info_dict.get("url", None)
-video_id = info_dict.get("id", None)
-video_title = info_dict.get('title', None)
+# info_dict = ydl.extract_info(url, download=False)
+# video_url = info_dict.get("url", None)
+# video_id = info_dict.get("id", None)
+# video_title = info_dict.get('title', None)
 
-print('info_dict : %s' %(info_dict))
-print('video_id: %s' %(video_id))
-print('video_title: %s' %(video_title))
+# print('info_dict : %s' %(info_dict))
+# print('video_id: %s' %(video_id))
+# print('video_title: %s' %(video_title))
 
 
-meta = ydl.extract_info(url, download=False)
+# meta = ydl.extract_info(url, download=False)
 
-print ('upload date : %s' %(info_dict['upload_date']))
-print ('uploader    : %s' %(info_dict['uploader']))
-print ('views       : %d' %(info_dict['view_count']))
-print ('likes       : %d' %(info_dict['like_count']))
-print ('dislikes    : %d' %(info_dict['dislike_count']))
-print ('id          : %s' %(info_dict['id']))
-print ('format      : %s' %(info_dict['format']))
-print ('duration    : %s' %(info_dict['duration']))
-print ('title       : %s' %(info_dict['title']))
-print ('description : %s' %(info_dict['description']))
+# print ('upload date : %s' %(info_dict['upload_date']))
+# print ('uploader    : %s' %(info_dict['uploader']))
+# print ('views       : %d' %(info_dict['view_count']))
+# print ('likes       : %d' %(info_dict['like_count']))
+# print ('dislikes    : %d' %(info_dict['dislike_count']))
+# print ('id          : %s' %(info_dict['id']))
+# print ('format      : %s' %(info_dict['format']))
+# print ('duration    : %s' %(info_dict['duration']))
+# print ('title       : %s' %(info_dict['title']))
+# print ('description : %s' %(info_dict['description']))

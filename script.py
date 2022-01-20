@@ -5,6 +5,9 @@
 #######  https://www.bogotobogo.com/VideoStreaming/YouTube/youtube-dl-embedding.php
 #######  https://www.codegrepper.com/code-examples/python/youtube-dl+python+download+to+specific+folder
 #######  https://www.codeproject.com/Articles/873060/Python-Search-Youtube-for-Video
+####### https://www.programcreek.com/python/example/98358/youtube_dl.YoutubeDL
+####### https://github.com/ytdl-org/youtube-dl/blob/master/README.md#format-selection
+####### https://www.programcreek.com/python/?code=DuckBoss%2FJJMumbleBot%2FJJMumbleBot-master%2FJJMumbleBot%2Fplugins%2Fextensions%2Fsound_board%2Futility%2Fsound_board_utility.py
 
 
 ############### Download youtube video by URL query ##########
@@ -13,7 +16,7 @@ from __future__ import unicode_literals
 import youtube_dl
 
 folder_name = 'converted_video_download'
-audio_file_name = 'ygrA_L-1tyk'
+audio_file_name = 'F_QFkE-UbGM'
 
 ydl_opts ={
          'outtmpl': f'/Users/eli/git_repos/python-script-extract-yt-video-data/'+folder_name+'/'+audio_file_name,
@@ -26,7 +29,7 @@ ydl_opts ={
              }]
      }
 
-url ='https://www.youtube.com/watch?v=ygrA_L-1tyk'
+url ='https://www.youtube.com/watch?v='+audio_file_name
 with youtube_dl.YoutubeDL(ydl_opts) as ydl:
     ydl.download([url])
 # info_dict = ydl.extract_info(url, download=False)
