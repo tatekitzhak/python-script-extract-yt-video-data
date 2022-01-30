@@ -3,8 +3,8 @@
 
 import mysql.connector
 from mysql.connector import Error
-connection = None
 
+connection = None
 
 def init_db_connection(host_name, db_name, user_name, user_password):
 	
@@ -43,8 +43,9 @@ connection = init_db_connection('localhost', 'db_test1', 'ran', 'ran')
 
 # queries
 if connection.is_connected():
-	query = "select * from topics"
-	query2 = "select * from subtopics"
+	query = "SELECT tc.`id`, topic, subtopic, sc.`topic_id` FROM `topics` tc INNER JOIN `subtopics` sc ON tc.`id`= sc.`topic_id`"
+
+	query2 = "SELECT * FROM subtopics"
 	data = db_query(connection, query)
 	print("Database records: ", data)
 
