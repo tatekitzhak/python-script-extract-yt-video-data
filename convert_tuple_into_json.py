@@ -1,4 +1,7 @@
 import json
+from error import add, mult
+
+
 
 def convert_tuple_to_json(tup, obj):
     for a, b,c,d in tup:
@@ -19,4 +22,6 @@ for topic in data_obj:
 	print(topic, ":")
 	for subtopic in json_dictionary[topic]:
   		print(subtopic)
+
+
 

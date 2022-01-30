@@ -1,3 +1,4 @@
+# Logs
 
 logs
 **/logs
@@ -18,3 +19,10 @@ dist/*
 converted_video_download/*
 
 test/*
+
+# Environments
+.env
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/

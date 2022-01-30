@@ -1,8 +1,18 @@
 # https://bitworks.software/en/2019-03-12-tornado-persistent-mysql-connection-strategy.html
 # https://stackoverflow.com/questions/66858012/how-to-share-a-mysql-connection-that-is-inside-a-function
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import mysql.connector
 from mysql.connector import Error
+
+db_host = os.getenv("DBHOST")
+db_name = os.getenv("DBNAME")
+db_user = os.getenv("DBUSER")
+db_password = os.getenv("DBPASS")
 
 connection = None
 
@@ -39,7 +49,7 @@ def db_query(connection, query):
             print("MySQL connection is closed successfully")
     return records
 
-connection = init_db_connection('localhost', 'db_test1', 'ran', 'ran')
+connection = init_db_connection(db_host, db_name, db_user, db_password)
 
 # queries
 if connection.is_connected():
