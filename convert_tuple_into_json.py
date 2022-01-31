@@ -1,5 +1,6 @@
 import json
 from error import add, mult
+import re
 
 
 
@@ -12,7 +13,20 @@ def convert_tuple_to_json(tup, obj):
         obj.setdefault(b, []).append(c)
     return obj
 
-tups = [(1, 'topic_a', '418', 1), (1, 'topic_a', '2028', 1), (1, 'topic_a', '30.3239', 1),  (2, 'topic_b', 'What’s your', 2), (2, 'topic_b', 'Have ', 2), (2, 'topic_b', 'What’s', 2), (3, 'topic_c', 'About ', 3), (3, 'topic_c', 'Creating', 3), (3, 'topic_c', 'Building ', 3), (3, 'topic_c', 'Query ', 3), (3, 'topic_c', 'Starter ', 3)]
+def remove_replc_non_alphanumeric(str):
+
+    # Remove all non-word characters (everything except numbers and letters)
+    str = re.sub(r"[^\w\s]", '', str)
+
+    # Remove all end of string non alphanumeric characters (i.e: question mark or space)
+    str = re.sub(r"[\s|\?]+$", '', str)
+
+    # Replace all runs of whitespace with a single dash
+    str = re.sub(r"\s+", '-', str)
+
+    return str
+
+tups = [(1, 'topic_a', '41 8!', 1), (1, 'topic_a', '2 0 2 8 ?', 1), (1, 'topic_a', '$30.3 2 3 9 ', 1),  (2, 'topic_b', 'What’s your ?', 2), (2, 'topic_b', 'Have ad !', 2), (2, 'topic_b', 'What’s this', 2), (3, 'topic_c', 'About you', 3), (3, 'topic_c', 'Creating', 3), (3, 'topic_c', 'Building 1 2 3 45', 3), (3, 'topic_c', 'Query abc', 3), (3, 'topic_c', 'Starter ther', 3)]
 
 json_dictionary = {}
 
@@ -21,7 +35,16 @@ data_obj = convert_tuple_to_json(tups, json_dictionary)
 for topic in data_obj:
 	print(topic, ":")
 	for subtopic in json_dictionary[topic]:
-  		print(subtopic)
+		try:
+			s = remove_replc_non_alphanumeric(subtopic)
+			print(s)
+		except Exception as e:
+			raise
+		else:
+			pass
+		finally:
+			pass
+  		
 
 
 
