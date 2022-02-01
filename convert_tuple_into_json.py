@@ -1,5 +1,4 @@
 import json
-from error import add, mult
 import re
 
 
@@ -26,25 +25,30 @@ def remove_replc_non_alphanumeric(str):
 
     return str
 
-tups = [(1, 'topic_a', '41 8!', 1), (1, 'topic_a', '2 0 2 8 ?', 1), (1, 'topic_a', '$30.3 2 3 9 ', 1),  (2, 'topic_b', 'What’s your ?', 2), (2, 'topic_b', 'Have ad !', 2), (2, 'topic_b', 'What’s this', 2), (3, 'topic_c', 'About you', 3), (3, 'topic_c', 'Creating', 3), (3, 'topic_c', 'Building 1 2 3 45', 3), (3, 'topic_c', 'Query abc', 3), (3, 'topic_c', 'Starter ther', 3)]
+def main():
 
-json_dictionary = {}
+	tups = [(1, 'topic a', '41 dk 8!', 1), (1, 'topic a', '2 0 2 8 ?', 1), (1, 'topic a', '$30.3-2 3 9 ', 1),  (2, 'topic_b', 'What’s your ?', 2), (2, 'topic_b', 'Have ad !', 2), (2, 'topic_b', 'What’s this', 2), (3, 'topic_c', 'About you', 3), (3, 'topic_c', 'Creating', 3), (3, 'topic_c', 'Building 1 2 3 45', 3), (3, 'topic_c', 'Query abc', 3), (3, 'topic_c', 'Starter ther', 3)]
 
-data_obj = convert_tuple_to_json(tups, json_dictionary)
+	json_dictionary = {}
 
-for topic in data_obj:
-	print(topic, ":")
-	for subtopic in json_dictionary[topic]:
-		try:
-			s = remove_replc_non_alphanumeric(subtopic)
-			print(s)
-		except Exception as e:
-			raise
-		else:
-			pass
-		finally:
-			pass
-  		
+	data_obj = convert_tuple_to_json(tups, json_dictionary)
+
+	for topic in data_obj:
+		st = remove_replc_non_alphanumeric(topic)
+		print(st,":")
+		for subtopic in json_dictionary[topic]:
+			try:
+				s = remove_replc_non_alphanumeric(subtopic)
+				print(s)
+			except Exception as e:
+				raise
+			else:
+				pass
+			finally:
+				pass
+	return __name__
+
+
 
 
 

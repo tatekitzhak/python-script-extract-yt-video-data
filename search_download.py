@@ -5,7 +5,7 @@ import urllib.request
 import urllib.parse
 import re
 
-############### Searching youtube videos by a string user input ##########
+# Searching youtube videos by a string user input 
 def search_youtube_video():
     print("Please, enter search query:")
 
@@ -18,7 +18,7 @@ def search_youtube_video():
         print("******** https://www.youtube.com/watch?v=" + i)
         download_youtube_video("https://www.youtube.com/watch?v=" + i, i)
 
-############### Download youtube video by URL query ##########
+# Download youtube video by URL query 
 
 def download_youtube_video(url, name):    
     folder_name = 'test'

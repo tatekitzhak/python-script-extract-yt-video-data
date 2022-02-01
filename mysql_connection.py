@@ -14,7 +14,6 @@ db_name = os.getenv("DBNAME")
 db_user = os.getenv("DBUSER")
 db_password = os.getenv("DBPASS")
 
-connection = None
 
 def init_db_connection(host_name, db_name, user_name, user_password):
 	
@@ -49,16 +48,18 @@ def db_query(connection, query):
             print("MySQL connection is closed successfully")
     return records
 
-connection = init_db_connection(db_host, db_name, db_user, db_password)
 
-# queries
-if connection.is_connected():
-	query = "SELECT tc.`id`, topic, subtopic, sc.`topic_id` FROM `topics` tc INNER JOIN `subtopics` sc ON tc.`id`= sc.`topic_id`"
 
-	query2 = "SELECT * FROM subtopics"
-	data = db_query(connection, query)
-	print("Database records: ", data)
+def main():
+	connection = init_db_connection(db_host, db_name, db_user, db_password)
+	# queries
+	if connection.is_connected():
+		query = "SELECT tc.`id`, topic, subtopic, sc.`topic_id` FROM `topics` tc INNER JOIN `subtopics` sc ON tc.`id`= sc.`topic_id`"
 
+		query2 = "SELECT * FROM subtopics"
+		data = db_query(connection, query)
+		# print("Database records: ", data)
+	return data
 
 
 
