@@ -1,9 +1,36 @@
 import mysql.connector
 from mysql.connector import Error
 import os, errno
+import json
+import re
 
-def make_dir_folder(name):
-    path= '/Users/eli/git_repos/python-script-extract-yt-video-data/'+name
+ROOT_DIR  = os.path.dirname(os.path.abspath(__file__))
+
+def convert_tuple_to_json(tup, obj):
+    for a, b,c,d in tup:
+        # print ('a:', a)
+        # print ('b:', b)
+        # print ('b:', c)
+        # print ('b:', d)
+        obj.setdefault(b, []).append(c)
+    return obj
+
+def remove_replc_non_alphanumeric(str):
+
+    # Remove all non-word characters (everything except numbers and letters)
+    str = re.sub(r"[^\w\s]", '', str)
+
+    # Remove all end of string non alphanumeric characters (i.e: question mark or space)
+    str = re.sub(r"[\s|\?]+$", '', str)
+
+    # Replace all runs of whitespace with a single dash
+    str = re.sub(r"\s+", '-', str)
+
+    return str
+
+def create_topics_folders(topic_name):
+
+    path= ROOT_DIR+'/'+topic_name
 
     # Check whether the specified path exists or not
     path_isExist = os.path.exists(path)
@@ -14,40 +41,87 @@ def make_dir_folder(name):
       # Create a new directory because it does not exist 
         try:
             os.makedirs(path)
-            print("The new directory is created =>", name)
+            print("The new directory is created =>", topic_name)
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
 
-def create_folders():
-    try:
-        connection = mysql.connector.connect(host='localhost',
-                                             database='db_test1',
-                                             user='ran',
-                                             password='ran')
-        if connection.is_connected():
-            db_Info = connection.get_server_info()
-            print("Connected to MySQL Server version ", db_Info)
+def create_subtopics_folders(topic_name, subtopic_name):
+    path= ROOT_DIR+'/'+topic_name+'/'+subtopic_name
+
+    # Check whether the specified path exists or not
+    path_isExist = os.path.exists(path)
+    print('IsExis a tpath : ',path_isExist)
+
+    if not path_isExist:
+      
+      # Create a new directory because it does not exist 
+        try:
+            os.makedirs(path)
+            print("The new directory is created =>", topic_name+subtopic_name)
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+
+
+
+
+def main(topics_data):
+
+    json_dictionary = {}
+
+    data_obj = convert_tuple_to_json(topics_data, json_dictionary)
+
+    # Create a new topics directory
+    for topic in data_obj:
+        topics = remove_replc_non_alphanumeric(topic)
+        create_topics_folders(topics)
+        print(topics,":")
+
+        # Create a new subtopics directory
+        for subtopic in json_dictionary[topic]:
+            try:
+                subtopics = remove_replc_non_alphanumeric(subtopic)
+                create_subtopics_folders(topics,subtopics)
+                print(subtopics)
+            except Exception as e:
+                raise
+            else:
+                pass
+            finally:
+                pass
+    return __name__
+
+
+# def create_folders():
+#     try:
+#         connection = mysql.connector.connect(host='localhost',
+#                                              database='db_test1',
+#                                              user='ran',
+#                                              password='ran')
+#         if connection.is_connected():
+#             db_Info = connection.get_server_info()
+#             print("Connected to MySQL Server version ", db_Info)
             
-        query = "select * from topics"
-        cursor = connection.cursor()
-        cursor.execute(query)
-        # get all records
-        records = cursor.fetchall()
-        print("Total number of rows in table: ", cursor.rowcount)
+#         query = "select * from topics"
+#         cursor = connection.cursor()
+#         cursor.execute(query)
+#         # get all records
+#         records = cursor.fetchall()
+#         print("Total number of rows in table: ", cursor.rowcount)
 
-        print("\n Table data: ",records)
-        for row in records:
-            # print("Rows = ", row[1] )
-            make_dir_folder(row[1])
-            print('__________________')
+#         print("\n Table data: ",records)
+#         for row in records:
+#             # print("Rows = ", row[1] )
+#             create_topics_folders(row[1])
+#             print('__________________')
 
-    except Error as e:
-        print("Error while connecting to MySQL", e)
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("MySQL connection is closed")
+#     except Error as e:
+#         print("Error while connecting to MySQL", e)
+#     finally:
+#         if connection.is_connected():
+#             cursor.close()
+#             connection.close()
+#             print("MySQL connection is closed")
 
-create_folders()
+# create_folders()

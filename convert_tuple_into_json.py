@@ -25,22 +25,24 @@ def remove_replc_non_alphanumeric(str):
 
     return str
 
-def main(tupl1):
-
-	tups = [(1, 'topic a', '41 dk 8!', 1), (1, 'topic a', '2 0 2 8 ?', 1), (1, 'topic a', '$30.3-2 3 9 ', 1),  (2, 'topic_b', 'What’s your ?', 2), (2, 'topic_b', 'Have ad !', 2), (2, 'topic_b', 'What’s this', 2), (3, 'topic_c', 'About you', 3), (3, 'topic_c', 'Creating', 3), (3, 'topic_c', 'Building 1 2 3 45', 3), (3, 'topic_c', 'Query abc', 3), (3, 'topic_c', 'Starter ther', 3)]
+def main(topics_data):
 
 	json_dictionary = {}
 
-	data_obj = convert_tuple_to_json(tupl1, json_dictionary)
+	data_obj = convert_tuple_to_json(topics_data, json_dictionary)
 
+	# Create a new topics directory
 	for topic in data_obj:
-		st = remove_replc_non_alphanumeric(topic)
-		create_folder.make_dir_folder(st)
-		print(st,":")
+		topics = remove_replc_non_alphanumeric(topic)
+		create_folder.create_topics_folders(topics)
+		print(topics,":")
+
+		# Create a new subtopics directory
 		for subtopic in json_dictionary[topic]:
 			try:
-				s = remove_replc_non_alphanumeric(subtopic)
-				print(s)
+				subtopics = remove_replc_non_alphanumeric(subtopic)
+				create_folder.create_subtopics_folders(topics,subtopics)
+				print(subtopics)
 			except Exception as e:
 				raise
 			else:

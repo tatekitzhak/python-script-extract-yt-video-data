@@ -1,8 +1,10 @@
-import convert_tuple_into_json
+# import convert_tuple_into_json
 import mysql_connection
+import create_folder
 
 def main():
-	print('Response processing module:', convert_tuple_into_json.main(mysql_connection.main()))
+	topics_data = mysql_connection.main()
+	print('Response processing module:', create_folder.main(topics_data))
 
 
 main()
