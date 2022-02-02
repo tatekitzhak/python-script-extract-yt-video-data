@@ -15,7 +15,7 @@ def convert_tuple_to_json(tup, obj):
         obj.setdefault(b, []).append(c)
     return obj
 
-def remove_replc_non_alphanumeric(str):
+def filter_non_alphanumeric_char(str):
 
     # Remove all non-word characters (everything except numbers and letters)
     str = re.sub(r"[^\w\s]", '', str)
@@ -74,14 +74,14 @@ def main(topics_data):
 
     # Create a new topics directory
     for topic in data_obj:
-        topic_name = remove_replc_non_alphanumeric(topic)
+        topic_name = filter_non_alphanumeric_char(topic)
         create_folder(topic_name)
         print(topic_name,":")
 
         # Create a new subtopics directory
         for subtopic in json_dictionary[topic]:
             try:
-                subtopic_name = remove_replc_non_alphanumeric(subtopic)
+                subtopic_name = filter_non_alphanumeric_char(subtopic)
                 create_subfolder(topic_name,subtopic_name)
                 print(subtopic_name)
             except Exception as e:
