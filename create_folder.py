@@ -28,7 +28,7 @@ def remove_replc_non_alphanumeric(str):
 
     return str
 
-def create_topics_folders(topic_name):
+def create_folder(topic_name):
 
     path= ROOT_DIR+'/'+topic_name
 
@@ -46,7 +46,7 @@ def create_topics_folders(topic_name):
             if e.errno != errno.EEXIST:
                 raise
 
-def create_subtopics_folders(topic_name, subtopic_name):
+def create_subfolder(topic_name, subtopic_name):
     path= ROOT_DIR+'/'+topic_name+'/'+subtopic_name
 
     # Check whether the specified path exists or not
@@ -58,7 +58,7 @@ def create_subtopics_folders(topic_name, subtopic_name):
       # Create a new directory because it does not exist 
         try:
             os.makedirs(path)
-            print("The new directory is created =>", topic_name+subtopic_name)
+            print("The new directory is created =>", topic_name+':'+subtopic_name)
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
@@ -74,16 +74,16 @@ def main(topics_data):
 
     # Create a new topics directory
     for topic in data_obj:
-        topics = remove_replc_non_alphanumeric(topic)
-        create_topics_folders(topics)
-        print(topics,":")
+        topic_name = remove_replc_non_alphanumeric(topic)
+        create_folder(topic_name)
+        print(topic_name,":")
 
         # Create a new subtopics directory
         for subtopic in json_dictionary[topic]:
             try:
-                subtopics = remove_replc_non_alphanumeric(subtopic)
-                create_subtopics_folders(topics,subtopics)
-                print(subtopics)
+                subtopic_name = remove_replc_non_alphanumeric(subtopic)
+                create_subfolder(topic_name,subtopic_name)
+                print(subtopic_name)
             except Exception as e:
                 raise
             else:
