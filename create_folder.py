@@ -28,9 +28,15 @@ def filter_non_alphanumeric_char(str):
 
     return str
 
-def create_folder(topic_name):
+def create_folder(topic_name, subtopic_name):
+    if topic_name and subtopic_name:
+        path= ROOT_DIR+'/'+topic_name+'/'+subtopic_name
+        print(path)
+    else:
+        path= ROOT_DIR+'/'+topic_name
+        print(path)
 
-    path= ROOT_DIR+'/'+topic_name
+    # path= ROOT_DIR+'/'+topic_name
 
     # Check whether the specified path exists or not
     path_isExist = os.path.exists(path)
@@ -46,26 +52,6 @@ def create_folder(topic_name):
             if e.errno != errno.EEXIST:
                 raise
 
-def create_subfolder(topic_name, subtopic_name):
-    path= ROOT_DIR+'/'+topic_name+'/'+subtopic_name
-
-    # Check whether the specified path exists or not
-    path_isExist = os.path.exists(path)
-    print('IsExis a tpath : ',path_isExist)
-
-    if not path_isExist:
-      
-      # Create a new directory because it does not exist 
-        try:
-            os.makedirs(path)
-            print("The new directory is created =>", topic_name+':'+subtopic_name)
-        except OSError as e:
-            if e.errno != errno.EEXIST:
-                raise
-
-
-
-
 def main(topics_data):
 
     json_dictionary = {}
@@ -75,14 +61,14 @@ def main(topics_data):
     # Create a new topics directory
     for topic in data_obj:
         topic_name = filter_non_alphanumeric_char(topic)
-        create_folder(topic_name)
+        create_folder(topic_name, None)
         print(topic_name,":")
 
         # Create a new subtopics directory
         for subtopic in json_dictionary[topic]:
             try:
                 subtopic_name = filter_non_alphanumeric_char(subtopic)
-                create_subfolder(topic_name,subtopic_name)
+                create_folder(topic_name,subtopic_name)
                 print(subtopic_name)
             except Exception as e:
                 raise
@@ -91,7 +77,6 @@ def main(topics_data):
             finally:
                 pass
     return __name__
-
 
 # def create_folders():
 #     try:
