@@ -16,9 +16,9 @@ def create_file(folder_name,subfolder_name):
 		print('Error:',e)
 		raise
 	else:
-		print('Result is:',file_name)
+		print('Result sum of files:',len(files))
 	finally:
-		print('executing finally:',myfile)
+		print('Executing sum of files:',myfile)
 
 
 	
