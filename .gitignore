@@ -13,12 +13,7 @@ logs
 .DS_Store
 **/.DS_Store
 
-dist/*
-**/dist/*
 
-converted_video_download/*
-
-test/*
 
 # Environments
 .env
@@ -28,4 +23,13 @@ test/*
 __pycache__/
 
 # ignored folders
-topic/
+
+data/*
+
+topic/*
+
+converted_video_download/*
+
+tests/*
+docs/*
+outputs/*

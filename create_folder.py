@@ -15,18 +15,18 @@ def convert_tuple_to_json(tup, obj):
         obj.setdefault(b, []).append(c)
     return obj
 
-def filter_non_alphanumeric_char(str):
+def filter_non_alphanumeric_char(topic):
 
     # Remove all non-word characters (everything except numbers and letters)
-    str = re.sub(r"[^\w\s]", '', str)
+    topic = re.sub(r"[^\w\s]", '', topic)
 
     # Remove all end of string non alphanumeric characters (i.e: question mark or space)
-    str = re.sub(r"[\s|\?]+$", '', str)
+    topic = re.sub(r"[\s|\?]+$", '', topic)
 
     # Replace all runs of whitespace with a single dash
-    str = re.sub(r"\s+", '-', str)
+    topic = re.sub(r"\s+", '-', topic)
 
-    return str
+    return topic
 
 def create_folder(topic_name, subtopic_name):
     if topic_name and subtopic_name:
@@ -78,6 +78,8 @@ def main(topics_data):
                 pass
     return __name__
 
+# main([("apple", "banana", "cherry")])
+
 # def create_folders():
 #     try:
 #         connection = mysql.connector.connect(host='localhost',
@@ -98,7 +100,7 @@ def main(topics_data):
 #         print("\n Table data: ",records)
 #         for row in records:
 #             # print("Rows = ", row[1] )
-#             create_topics_folders(row[1])
+#             # create_topics_folders(row[1])
 #             print('__________________')
 
 #     except Error as e:
