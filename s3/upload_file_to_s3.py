@@ -13,6 +13,6 @@ client = boto3.client('s3',aws_access_key_id=S3_ACCESS_KEY,aws_secret_access_key
 # create directory and upload file
 for file in os.listdir():
 	if '.txt' in file:
-		upload_file_bucket = 'ctxt-1'
-		upload_file_key = 'file/'+str(file)
-		client.upload_file(file,upload_file_bucket,upload_file_key)
+		upload_file_bucket = 'ctxt-1' # bucket name - container that holde objects
+		upload_file_key = 'file/'+str(file) # folder_name/file_name (objects name)
+		client.upload_file(file,upload_file_bucket,upload_file_key) # create a folder and upload files (objects)
